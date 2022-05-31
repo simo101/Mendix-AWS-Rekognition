@@ -1,4 +1,4 @@
-# Blank Web App
+# Mendix AWS Rekoginition Template
 
 House of [Blank Web App](https://marketplace.mendix.com/link/component/51830)
 
