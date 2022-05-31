@@ -1,0 +1,200 @@
+
+.dashboard-page {
+    .add-border{
+        border-right:solid 1px $font-color-default;
+    }
+
+    .truck-containers{
+        position:relative;
+        img{
+            width:350px;
+        }
+        .container-button{
+            position:absolute;
+            top:55px;
+            width:115px;
+            height: 80px;
+            border-radius: 5px;
+            border:solid 3px $gray-darker;
+            background-color: $gray-dark;
+            color:$font-color-default;
+            font-size: 3em;
+            padding:0;
+            &.container-one{
+                left:30px;
+            }
+            &.container-two{
+                left:150px;
+            }
+            &.active-container{
+                background-color: $brand-success;
+            }
+        }
+    }
+
+    .widget-switch-btn-wrapper.un-checked{
+        background-color: $brand-danger;
+    }
+    
+
+    .mx-layoutgrid {
+        padding: 0px !important;
+    }
+
+    .vehicle-image {
+        .img-responsive {
+            height: 250px;
+            border-radius: 7px;
+            background-position: center;
+            object-fit:cover;
+            background-color: #fff;
+        }
+    }
+
+    .vehicle-image-title {
+        padding-top: -30px;
+    }
+
+    .widget-google-maps {
+        > div {
+            > div{
+                border-radius: 7px !important;
+            }
+        }
+    }
+
+   
+
+    .dash-stat-details {
+        margin-top: 10px;
+        border-radius: 7px;
+        background-color: $gray-darker;
+        padding: 20px;
+
+        p {
+            margin: 0px;
+            line-height: 1.6;
+        }
+    }
+
+    .widget-progress-bar {
+        &.progress-bar-primary {
+            .progress {
+                background-color: #fff;
+                border-radius: 5px;
+            }
+        }    
+    }
+
+    .description {
+        //background-color: #fff;
+        padding: 10px;
+        border-radius: 5px;
+    }
+
+    .timeline {
+        margin-top: 10px;
+        margin-bottom: 0px;
+        background-color: #fff;
+        padding: 10px;
+        border-radius: 5px;
+    }
+
+    .dashboard-small-titles {
+        font-size: 16px;
+    }
+    
+
+    .gauges {
+        > svg.speedometer {
+          >  g.arc {
+                fill: yellow;
+            }
+        }    
+    }
+
+    .mx-link{
+        border-bottom: solid 1px;
+        &:hover{
+            text-decoration: none;
+            filter:brightness(1.5);
+        }
+    }
+    .map-container{
+        border-radius:10px;overflow:hidden;
+    }
+    
+}
+
+
+
+body.profile-phone{
+    .dashboard-page {
+        .add-border{
+            border:none;
+        }
+        .widget-google-maps > div > div{
+            border-radius: 0px !important;
+        }
+
+        .card.truck-containers{
+            width:96%;
+            margin-left:2%;
+            text-align: center;
+            height:160px;
+            img{
+                width:260px;
+                position:absolute;
+                left:50%;
+                top:15px;
+                margin-left:-130px;
+            }
+             .container-button{
+                 position:relative;
+                top:25px;
+                width:90px;
+                height: 70px;
+                border-radius: 5px;
+                z-index: 2;
+                
+                &.container-one{
+                    left:-35px;
+                }
+                &.container-two{
+                    left:-30px;
+                }
+            }
+        }
+
+        .sensor-container{
+            width:96%;
+            margin-left:2%;
+            padding:4px;
+            .row .col{
+                margin:4px;
+                
+            }
+            .sensor-levels{
+                div{
+                    text-align: center;
+                }
+                .sensor-label{
+                    display: inline-block !important;
+                    &:after{
+                        content:':';
+                    }
+                }
+                .display-value{
+                    display: inline-block !important;
+                    margin-left: 4px;
+                }
+            }
+            .sensor-toggles h5{
+                min-height: 47px;
+            }
+        }
+        .map-container{
+            border-radius:0;
+        }
+    }
+}

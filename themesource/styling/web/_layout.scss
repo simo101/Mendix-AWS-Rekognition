@@ -1,0 +1,312 @@
+html body{
+    div.main-container{
+        position: relative;
+        padding-bottom:70px;
+        height:100%;
+    }
+    .powered-by{
+        position: absolute;
+        bottom:0px;
+        padding:5px 5px 20px 5px;
+        width:100%;
+        text-align: center;
+        
+    }
+    .aws-logo{
+            margin-left:10px;
+            height: 25px;
+        }
+    .height-full{
+        height:100%;
+    }
+
+    .loading-block{
+        position:absolute;width:100%;height:100%;opacity:0.7;z-index:9997;background:#000;top:0;left:0;
+    }
+    .loading-image{
+        z-index: 9998;
+        position:absolute;width:200px;height:200px;
+        left:50%;top:50%;
+        margin-left:-100px;margin-top:-100px;
+    }
+    .loading-message{
+        text-align: center;
+        z-index: 9999;
+        position:absolute;width:400px;height:100px;
+        left:50%;top:50%;
+        margin-left:-200px;margin-top:-50px;
+        font-size: 40pt;
+        font-weight: bold;
+    }
+
+    .card {
+        background-color: $gray-dark;
+        box-shadow: 0px 0px 30px rgb(0 0 0 / 20%);
+        border-radius: 10px;
+        width: 100%;
+        margin: auto;
+    
+        @media (max-width: $screen-md) {
+            max-width: 100%;
+        }
+    }
+
+    .alert-page{
+        .modal-header{
+            display:none;
+        }
+        .mx-window-body{
+            padding:10px;
+            overflow: hidden;
+        }
+        .alert-view{
+            position: relative;
+        }
+        .sensor-icon{
+            top:0;
+            right:0;
+        }
+    }
+
+    .modal-content{
+        background-color:$gray-darker;
+    }
+
+    .slideout-container{
+        background-color: $gray-dark;
+        .slideout-content{
+            padding:20px;
+        }
+    }
+
+    .dark-container {
+        background-color: $gray-darker;
+        border-radius: 7px;
+        padding: 10px;
+        position:relative;
+        height:100%;
+       
+        .key-figure{
+            font-size:60px;
+            font-weight:bold;
+        }
+        &.small-container{
+            min-width:180px;
+        }
+    }
+
+    .invert-image{
+        filter:invert(1);
+    }
+
+    .complete-image{
+        &.sensor-icon{
+            opacity: 1;
+        }
+        filter: invert(93%) sepia(83%) saturate(521%) hue-rotate(16deg) brightness(90%) contrast(97%);
+    }
+
+    .progress-image{
+        filter: invert(37%) sepia(93%) saturate(2742%) hue-rotate(181deg) brightness(94%) contrast(101%);
+    }
+
+    .sensor-icon{
+        position:absolute;
+        top:10px;
+        right:10px;
+        opacity: 0.2;
+
+    }
+    .min-text{
+        color:$brand-info;
+    }
+    .optimum-text{
+        color:$brand-success;
+    }
+    .max-text{
+        color:$brand-danger;
+    }
+    .display-value{
+        font-weight:bold;
+    }
+
+    .fleet-card{
+        position:relative;
+        height:220px;
+        overflow:clip; 
+        border-radius: 10px;
+        .card-image{
+            position:relative;
+            filter:brightness(0.2);
+            top:-70px;
+        }
+        &:hover{
+            .card-image{
+                filter:brightness(0.4);
+                transition: 1s;
+            }
+        }
+        .fleet-card-overlay{
+            padding:10px;
+            width:100%;
+            height:100%;
+            position:absolute;
+            top:0;
+            left:0;
+        }
+        .last-updated{
+            position:absolute;
+            bottom:10px;
+            left:10px;
+        }
+        div.mx-layoutgrid.mx-layoutgrid-fluid {
+            padding:8px 0px !important;
+        }
+    }
+    .picture-case{
+        position:relative;
+    }
+
+    .mx-name-sidebarToggle1,.mx-name-sidebarToggle2{
+        color:$font-color-default;
+    }
+
+    .widget-timeline-icon-wrapper{
+        width:30px;
+        height:30px;
+    }
+    .timeline-icon{
+        border:solid 1px $font-color-default;
+        border-radius: 50%;
+        background-color: $brand-primary;
+        padding:5px;
+        &.positive{
+            background-color: $brand-success;
+            img{
+                filter:invert(0)
+           }
+        }
+        &.negative{
+            background-color: $brand-danger;
+        }
+    }
+
+    .chart-select:after{
+            width: 0;
+        height: 0;
+        border-left: 6px solid transparent;
+        border-right: 6px solid transparent;
+        border-top: 6px solid #fff;
+        position: absolute;
+        top: 32%;
+        right: 19px;
+        content: "";
+        z-index: 98;
+    }
+
+    .region-topbar .sign-out-column .sing-out{
+        text-decoration: none;
+    }
+}
+
+html body.profile-phone{
+    .card{
+        padding:10px 5px;
+        max-width:95%;
+    }
+    .mx-dataview-content, .mx-scrollcontainer-wrapper{
+        &::-webkit-scrollbar {
+            width: 0;  /* Remove scrollbar space */
+            background: transparent;  /* Optional: just make scrollbar invisible */
+        }
+        /* Optional: show position indicator in red */
+        &::-webkit-scrollbar-thumb {
+            background: $gray;
+        }
+    }
+    .dark-container {
+        .key-figure{
+            font-size:30px;
+        }
+        &.small-container{
+            min-width:auto;
+        }
+    }
+    .mx-scrollcontainer-toggleable{
+        background-color: $gray-dark;
+        //padding:0px 20px;
+        .sidebar-content{
+            padding:20px 10px;
+            height:100%;
+            position:relative;
+            .mx-dataview {
+                height: 90%;
+            }
+            .signout-button{
+                width:100%;
+                position:absolute;
+                bottom:0px;
+            }
+        }
+    }
+    
+    .loading-message{
+        width:100%;
+        left:0;
+        margin-left:0;
+    }
+
+    .fleet-card{
+        height:110px;
+        .card-image{
+            top:-90px;
+            filter:brightness(0.4);
+        }
+        .fleet-card-overlay{
+            height:auto;
+            top:initial;
+            bottom:0px;
+            text-align: center;
+        }
+    }
+
+    .mob-dashboard{
+        height:100%;
+
+        .mob-map{
+            height:150px;
+            overflow:hidden;
+        }
+        .mob-body{
+            height: calc(100% - 150px);
+
+            .mx-tabcontainer{
+                height: 100%;
+                //margin-bottom: 30px;
+                .tab-content.mx-tabcontainer-content{
+                    height: calc(100% - 90px);
+                    overflow-y:auto;
+                    &::-webkit-scrollbar {
+                        width: 6px;  /* Remove scrollbar space */
+                        border-radius: 50%;
+                        background:  transparent;  /* Optional: just make scrollbar invisible */
+                    }
+                    /* Optional: show position indicator in red */
+                    &::-webkit-scrollbar-thumb {
+                        background: $gray;
+                    }
+                }
+            }
+            
+        }
+    }
+    .widget-timeline-events-wrapper{
+        margin-left:30px;
+
+        .widget-timeline-event{
+            padding-right:10px;
+        }
+    }
+
+   
+}

@@ -1,0 +1,211 @@
+
+
+.login-title {
+    padding-top: 50px;
+    padding-left: 20px;
+    
+    @media (max-width: 991px) {
+        margin: 0 auto;
+        margin-top: 0vh;
+        margin-bottom: 2vh;
+        display: table;
+        padding-left: 35px;
+    }
+}
+
+.login-mobile-bg {
+    @media (max-width: 991px) {
+        background-image: url("login-image.jpg");
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-position: center;        
+        background: $gray-dark;  /* fallback for old browsers */
+        background: linear-gradient(rgb(60,64,66,0.9), rgb(41,41,41,0.85)), url("login-image.jpg");  /* Chrome 10-25, Safari 5.1-6 */
+        background: linear-gradient(rgb(60,64,66,0.9), rgb(41,41,41,0.85)), url("login-image.jpg"); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */  
+    }
+}
+
+.login-page {
+    .mx-layoutgrid-fixed {
+        @media (max-width: 1090px) {
+            padding-left: 0px;
+            padding-right: 0px;
+            max-width: 100%;
+        }
+    }
+}
+
+
+
+.full-height {
+    height: 100vh;
+
+    .row, .col {
+        height: 100%;
+    }
+}
+
+.region-content {
+    margin: 0 auto;
+}
+
+.img-fullBackground {
+    top: 0;
+    position: fixed;
+    z-index: 0;
+    width:50%;
+    object-fit: cover;
+    object-position: top;
+
+    &:focus{
+        outline: 0;
+    }
+}
+
+.form-signup {
+    box-shadow: 0px 0px 30px rgb(0 0 0 / 20%);
+    padding: 30px;
+    background: #3C4042;
+    border-radius: 10px;
+    position: absolute;
+    width: 85%;
+    top: 0;
+    bottom: 0;
+    height: fit-content;
+    margin: auto;
+    left: 0;
+    right: 0;
+
+    @media (max-width: $screen-md) {
+        max-width: 100%;
+    }
+
+    h1 {
+        font-weight: bold;
+    }
+}
+
+.login-container {
+
+    .login-textbox {
+        position: relative;
+        ::before {
+            content: '';
+            height: 30px;
+            width: 30px;
+            position: absolute;
+            left: 0;
+            bottom: 10px;
+            z-index: 3;
+        }
+
+        input {
+            padding: 14px ;
+            padding-left: 40px;
+            padding-top: 10px;
+            border-radius: 0px;
+            border-top: 0px;
+            border-left: 0px;
+            border-right: 0px;
+            margin-top: 0px;
+            z-index: 2;
+            background-color: transparent;
+            transition-property: border-width .1s ease-in-out;
+
+            &:focus {
+                border-width: 2px;
+            }
+
+            &:-internal-autofill-selected {
+                -webkit-box-shadow: 0 0 0px 1000px #3C4042 inset;
+            }
+        }
+
+        .control-label {
+            font-size: 16px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 0px;
+        }
+        
+        &.has-content,
+        &:focus-within {
+            input {
+                border: 1px solid $brand-primary;
+
+                &:focus {
+                    background-color: transparent;
+                    border-top: 0px;
+                    border-right: 0px;
+                    border-left: 0px;
+                }
+
+                &:focus-within {
+                    border-top: 0px;
+                    border-right: 0px;
+                    border-left: 0px;
+                }
+            }
+        }
+
+        &.email-textbox {
+            margin-bottom: 15px;
+
+            ::before {
+                background-image: url("email-login.svg");
+            }
+        }
+
+        &.password-textbox {
+            margin-top: 35px !important;
+            margin-bottom: 25px;
+
+            ::before {
+                background-image: url("password-login.svg");
+            }
+            
+        }
+    }
+
+    .login-btns {
+        padding-top: 5px;
+    }
+}
+
+.form-control {
+    font-size: 16px;
+    color: #fff !important;
+}
+
+.login-message {
+    margin-bottom: 20px;
+    font-size: 14px;
+    font-weight: regular;
+    color: #ffffff;
+    background-color: $brand-danger;
+    border-width: 0px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.forgot-password {
+    text-align: center;
+
+    .mx-link {
+        font-size: 14px;
+        color: #0a1325;
+    
+        &:hover {
+            color: $brand-primary;
+        }
+    }
+}
+
+.bottom-container {
+    position: absolute;
+    bottom: 5%;
+    width: 85%;
+    margin: auto;
+    left: 0;
+    right: 0;
+}

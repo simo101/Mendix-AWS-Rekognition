@@ -1,0 +1,55 @@
+.btn-primary {
+    border-radius: 50px;
+    font-size: 16px;
+    font-weight: 700;
+    color: #fff;
+    border-color: $brand-primary;
+    background-color: $brand-primary;
+
+    &:hover {
+        background-color: $brand-success;
+        border-color: $brand-success;
+    }
+}
+
+.btn-default {
+    border-radius: 50px;
+    font-size: 16px;
+    font-weight: 500;
+    border-color: #e7e7e9;
+    background-color: $brand-default;
+    font-weight: 500;
+
+
+    &:hover {
+        background-color: $brand-primary;
+        color: $brand-default;
+        border-color: #ABA5C9;
+    }
+}
+
+.btn-success {
+    color: $font-color-default;
+    border-radius: 50px;
+    font-size: 16px;
+    font-weight: 700;
+    border-color: $brand-success;
+    background-color: $brand-success;
+
+
+    &:hover {
+        color: #fff;
+        background-color: $brand-primary;
+        border-color: $brand-primary;;
+    }
+}
+
+.btn-photo-edit{
+    position:absolute;
+    top:0px;
+    right:0px;
+    border-radius: 0 10px 0 10px;
+    
+    background-color: $brand-primary;
+    color:$font-color-default;
+}

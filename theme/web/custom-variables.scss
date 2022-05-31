@@ -9,19 +9,19 @@
 
 //== Gray Shades
 //## Different gray shades to be used for our variables and components
-$gray-darker: #0a1325;
-$gray-dark: #474e5c;
+$gray-darker: #292929;
+$gray-dark: #3C4042;
 $gray: #787d87;
-$gray-light: #a9acb3;
+$gray-light: #C2C2C2;
 $gray-primary: #e7e7e9;
 $gray-lighter: #f8f8f8;
 
 //== Step 1: Brand Colors
-$brand-default: $gray-primary;
-$brand-primary: #264ae5;
-$brand-success: #3cb33d;
-$brand-warning: #eca51c;
-$brand-danger: #e33f4e;
+$brand-default: #E8F0FD;
+$brand-primary: #864FA1;
+$brand-success: #C1E35F;
+$brand-warning: #FEA502;
+$brand-danger: #F2635E;
 
 $brand-logo: false;
 $brand-logo-height: 32px;
@@ -31,7 +31,7 @@ $brand-logo-width: 32px; // Only used for CSS brand logo
 
 // Default Font Size & Color
 $font-size-default: 14px;
-$font-color-default: #0a1325;
+$font-color-default: #fff;
 
 // Global Border Color
 $border-color-default: #ced0d3;
@@ -43,7 +43,7 @@ $topbar-minimalheight: 48px;
 $topbar-border-color: $border-color-default;
 
 // Sidebar
-$sidebar-bg: #24276c;
+$sidebar-bg: #3C4042;
 
 // Topbar mobile
 $m-header-height: 45px;
@@ -52,15 +52,15 @@ $m-header-color: #fff;
 $m-header-title-size: 16px;
 
 // Navbar Brand Name / For your company, product, or project name (used in layouts/base/)
-$navbar-brand-name: #fff;
+$navbar-brand-name: $font-color-default;
 
 // Background Colors
 // Backgrounds
-$bg-color: #f8f8f8;
-$bg-color-secondary: #fff;
+$bg-color: #292929;
+$bg-color-secondary: #3C4042;
 
 // Default Link Color
-$link-color: $brand-primary;
+$link-color: $brand-success;
 $link-hover-color: darken($link-color, 15%);
 
 //
@@ -76,10 +76,13 @@ $link-hover-color: darken($link-color, 15%);
 //## Change your font family, weight, line-height, headings and more (used in components/typography)
 
 // Font Family Import (Used for google font plugin in theme creater)
-$font-family-import: "https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700";
+$font-family-import: "https://fonts.googleapis.com/css?family=Red+Hat+Display:300,400,500,600,700,800,900";
+
+
+
 
 // Font Family / False = fallback from Bootstrap (Helvetica Neue)
-$font-family-base: "Open Sans", sans-serif;
+$font-family-base: "Red Hat Display", sans-serif;
 
 // Font Sizes
 $font-size-large: 18px;
@@ -88,8 +91,8 @@ $font-size-small: 12px;
 // Font Weights
 $font-weight-light: 100;
 $font-weight-normal: normal;
-$font-weight-semibold: 600;
-$font-weight-bold: bold;
+$font-weight-semibold: 500;
+$font-weight-bold: 700;
 
 // Font Size Headers
 $font-size-h1: 31px;
@@ -110,7 +113,7 @@ $font-header-margin: 0 0 8px 0;
 
 // Text Colors
 $font-color-detail: #6c717e;
-$font-color-header: #0a1325;
+$font-color-header: $gray-lighter;
 
 //== Navigation
 //## Used in components/navigation
@@ -202,8 +205,8 @@ $form-input-line-height: $line-height-base;
 $form-input-border-radius: $border-radius-default;
 
 // Form Input styling
-$form-input-bg: #fff;
-$form-input-bg-focus: #fff;
+$form-input-bg: rgb(71, 71, 71) !default;
+$form-input-bg-focus: rgb(109, 109, 109) !default;
 $form-input-bg-hover: $gray-primary;
 $form-input-bg-disabled: $bg-color;
 $form-input-color: $font-color-default;
@@ -618,10 +621,10 @@ $screen-lg: 992px;
 $screen-xl: 1200px;
 
 // So media queries don't overlap when required, provide a maximum (used for max-width)
-$screen-xs-max: calc(#{$screen-sm} - 1px);
-$screen-sm-max: calc(#{$screen-md} - 1px);
-$screen-md-max: calc(#{$screen-lg} - 1px);
-$screen-lg-max: calc(#{$screen-xl} - 1px);
+$screen-xs-max: ($screen-sm - 1);
+$screen-sm-max: ($screen-md - 1);
+$screen-md-max: ($screen-lg - 1);
+$screen-lg-max: ($screen-xl - 1);
 
 //== Settings
 //## Enable or disable your desired framework features

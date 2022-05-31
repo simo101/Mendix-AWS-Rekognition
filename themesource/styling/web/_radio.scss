@@ -1,0 +1,46 @@
+.radio-group{
+    .mx-radiogroup {
+        .radio{
+            margin:0 !important;
+            display: inline-flex;
+            flex-grow: 1;
+            text-align: center;
+            border-right:1px $brand-primary solid;
+            &:hover{
+                background-color: $gray;
+                label{
+                    color:$font-color-default;
+                }
+            }
+        }
+        input[type=radio] {
+            position: absolute;
+            visibility: hidden;
+            display: none;
+        }
+        input[type=radio] + label {
+            margin-left: 0px;
+        }
+        input[type=radio]:checked + label{
+            color: $font-color-default;
+            background: $brand-primary;
+        }
+        
+        label + input[type=radio] + label {
+            border-left: solid 3px $font-color-default;
+        }
+        label {
+            color: lighten($gray-dark,40%);
+            display: inline-block;
+            cursor: pointer;
+            font-weight: bold;
+            padding: 15px 10px;
+            width:100%;
+        }
+
+        border: solid 3px $brand-primary;
+        display: inline-block;
+        border-radius: 10px;
+        overflow: hidden;
+    }
+}

@@ -1,0 +1,45 @@
+html body{
+    div.mx-datagrid table tbody {
+        tr:hover,tr.selected:hover{
+            td{
+                color:$gray-darker;
+            }
+        }
+        tr.selected
+        {
+            td{
+                background-color: $gray !important;
+            }
+        }
+        }
+        .pagination-bar{
+        color:$font-color-default;
+        }
+        .pagination-bar .pagination-button {
+        color:$font-color-default;
+    }
+
+    div.mx-name-dataGrid21 div.table {
+        background-color: $gray-dark;
+        .th{
+            background-color: $gray-darker;
+        }
+    }
+
+    .mx-listview{
+        li{
+            background-color: $gray-darker;
+            &.selected{
+                background-color: $gray-dark;
+                
+            }
+        }
+    }
+
+    div.table{
+        background-color: $gray-darker;
+        div[role='columnheader']{
+            background-color: darken($gray-darker,6);
+        }
+    }
+}

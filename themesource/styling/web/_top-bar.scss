@@ -1,0 +1,35 @@
+.region-topbar {
+    background-color: #595F61;
+    height: 55px;
+    padding-top: 10px;
+
+    .name-column {
+        padding-left: 0px;
+
+        .app-name {
+            font-size: 20px;
+            margin-bottom: 0px;
+        }
+    }
+
+    .sign-out-column {
+        padding-right: 20px !important;
+
+        .sing-out {
+            font-size: 16px;
+            font-weight: 700;
+            color: #fff;
+            text-decoration: underline; 
+
+            &:hover {
+                color: $brand-success;
+            }
+
+
+        }
+    }
+}
+
+.mobile-header{
+    background-color: #595F61;
+}
