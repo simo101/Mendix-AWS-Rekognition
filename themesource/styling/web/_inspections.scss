@@ -22,6 +22,7 @@ html body{
         width:300px;
         border:dashed 3px $gray;
         border-radius:10px;
+        display: inline-block;
 
         .btn{
             width:100%;
@@ -85,3 +86,32 @@ html body{
         color:$gray !important;
     }
 }
+    .img-container{
+        position:relative;
+        max-width: 500px;
+        display: inline-block;
+    }
+
+    .img-highlight{
+        position: absolute;
+
+        &.high-confidence{
+            border: $brand-success solid 2px;
+            background-color: rgba(193,227,95,0.4);
+            z-index:3;
+        }
+        &.medium-confidence{
+            border: $brand-warning solid 2px;
+            background-color: rgba(254,165,2,0.4);
+            opacity: 0.6;
+            z-index:2;
+        }
+        &.low-confidence{
+            border: $brand-danger solid 2px;
+            background-color: lighten($brand-danger, 20%);
+            opacity: 0.2;
+            z-index:1;
+        
+        }
+
+    }

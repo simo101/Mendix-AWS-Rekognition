@@ -23820,7 +23820,6 @@ html body div.main-container {
   height: 100%;
 }
 html body .powered-by {
-  position: absolute;
   bottom: 0px;
   padding: 5px 5px 20px 5px;
   width: 100%;
@@ -24180,6 +24179,7 @@ html body .camera-background {
   width: 300px;
   border: dashed 3px #787d87;
   border-radius: 10px;
+  display: inline-block;
 }
 html body .camera-background .btn {
   width: 100%;
@@ -24230,6 +24230,33 @@ html body .inspection-vehicle.collapsed .inspection-body {
 }
 html body .reset-inspections {
   color: #787d87 !important;
+}
+
+.img-container {
+  position: relative;
+  max-width: 500px;
+  display: inline-block;
+}
+
+.img-highlight {
+  position: absolute;
+}
+.img-highlight.high-confidence {
+  border: #C1E35F solid 2px;
+  background-color: rgba(193, 227, 95, 0.4);
+  z-index: 3;
+}
+.img-highlight.medium-confidence {
+  border: #FEA502 solid 2px;
+  background-color: rgba(254, 165, 2, 0.4);
+  opacity: 0.6;
+  z-index: 2;
+}
+.img-highlight.low-confidence {
+  border: #F2635E solid 2px;
+  background-color: #fabebc;
+  opacity: 0.2;
+  z-index: 1;
 }
 
 .radio-group .mx-radiogroup {
