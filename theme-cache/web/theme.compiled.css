@@ -24189,11 +24189,12 @@ html body .camera-background .btn {
   background-color: transparent;
   border: none;
   color: #fff;
+  font-weight: 500;
 }
 html body .camera-background .btn:hover {
   color: #864FA1;
 }
-html body .camera-background .btn span {
+html body .camera-background .btn .glyphicon {
   width: 100%;
   display: block;
   font-size: 4em;
@@ -24235,7 +24236,11 @@ html body .reset-inspections {
 .img-container {
   position: relative;
   max-width: 500px;
-  display: inline-block;
+  display: block;
+  text-align: center;
+}
+.img-container img {
+  display: inline;
 }
 
 .img-highlight {

@@ -32,10 +32,12 @@ html body{
             background-color: transparent;
             border:none;
             color:$font-color-default;
+            // font-size: 16px;
+            font-weight: 500;
             &:hover{
                 color:$brand-primary;
             }
-            span{
+            .glyphicon{
                 width:100%;
                 display:block;
                 font-size: 4em;
@@ -89,7 +91,11 @@ html body{
     .img-container{
         position:relative;
         max-width: 500px;
-        display: inline-block;
+        display: block;
+        text-align: center;
+        img{
+            display:inline;
+        }
     }
 
     .img-highlight{

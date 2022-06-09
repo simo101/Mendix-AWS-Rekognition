@@ -21,6 +21,7 @@ import { Big } from "big.js";
  */
 export async function JS_AddBoundingBox(className, boundingBox, customLabel, highConfidenceThreshold, mediumConfidenceThreshold) {
 	// BEGIN USER CODE
+	if (typeof boundingBox !== 'undefined' && typeof customLabel !== 'undefined'){
 			var container = document.getElementsByClassName("className")[0];
 			var confidence = customLabel.get("Confidence");
 			var top = boundingBox.get("Top");
@@ -40,7 +41,7 @@ export async function JS_AddBoundingBox(className, boundingBox, customLabel, hig
 			highlight.style.left = (left*100) + "%";
 			highlight.style.width = (width*100) + "%";
 			highlight.style.height = (height*100) + "%";
-
 			container.append(highlight);
+	}
 	// END USER CODE
 }
