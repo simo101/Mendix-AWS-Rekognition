@@ -22,7 +22,7 @@ import { Big } from "big.js";
 export async function JS_AddBoundingBox(className, boundingBox, customLabel, highConfidenceThreshold, mediumConfidenceThreshold) {
 	// BEGIN USER CODE
 	if (typeof boundingBox !== 'undefined' && typeof customLabel !== 'undefined'){
-			var container = document.getElementsByClassName("className")[0];
+			var container = document.getElementsByClassName(className)[0];
 			var confidence = customLabel.get("Confidence");
 			var top = boundingBox.get("Top");
 			var left = boundingBox.get("Left");

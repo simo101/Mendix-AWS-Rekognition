@@ -24238,6 +24238,7 @@ html body .reset-inspections {
   max-width: 500px;
   display: block;
   text-align: center;
+  margin: 0 auto;
 }
 .img-container img {
   display: inline;
