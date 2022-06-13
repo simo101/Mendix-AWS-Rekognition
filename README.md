@@ -1,7 +1,7 @@
 # Mendix AWS Rekoginition Template
 Welcome to the Mendix AWS Rekognition template. This template has been designed to help you get started with using Mendix and AWS Rekognition. It contains all the required modules to make it easy for you to build an app connected to AWS Rekognition. Once built the app will allow you to take a photo on your mobile phone or laptop, upload it to AWS Rekognition, and view the results of the Rekognition analysis. The template contains a start and complete module so that you can either decide to use the final solution or build your way up to the solution.
 
-<b>This template already assumes that you have some knowledge of AWS and have setup a AWS Rekognition AI model.</b>
+<b>This template already assumes that you have some knowledge of AWS and an AWS Account.</b>
 
 ## Setup
 In order to connect to AWS Rekognition it's important that you setup a number of constants. These constants are environment variables needed to make sure that the app can connect to the right AWS service using your AWS credentials.
@@ -13,7 +13,7 @@ In order to authenticate with AWS services it's important that requests are sign
 3. With the application open inside Studio Pro expand the Marketplace modules folder item in the app explorer.
 4. Then expand the AWS_Sig4 module.
 5. Finally double click on the Access Key ID and Secret Key then paste the values into each.
-<img src="readme-pics/AppExplorer.jpg"/>
+<img src="readme-pics/app-explorer.jpg"/>
 
 ### Setting up the Rekognition constants
 The Rekognition module has two constants that need to be set to ensure that the APIs can communicate with the pre-built rekognition model. These are:
@@ -22,8 +22,118 @@ The Rekognition module has two constants that need to be set to ensure that the 
 
 These constants can be found inside the AWS_Rekognition module in the marketplace folder. Then open up the constants folder:
 
-<img src="readme-pics/AppExplorer_Rekognition.jpg"/>
+<img src="readme-pics/app-explorer-rekognition.jpg"/>
 
 Once you have these constants setup your ready to begin your build.
 
 ## The Build
+
+## AWS S3 Dataset
+1.	Sign in to the AWS Management Console and open the Amazon S3 console at https://console.aws.amazon.com/s3/.
+2.	Choose Create bucket.
+The Create bucket wizard opens.
+3.	In Bucket name, enter a DNS-compliant name for your bucket. For example “mendixcars-yourname”
+4.	In Region, choose the AWS Region where you want the bucket to reside.
+Choose a Region close to you to minimize latency and costs and address regulatory requirements.
+5.	Leave other settings as default, scroll down and click Create bucket button.
+6.	Select a new bucket and create folders in the bucket by clicking Create folder button.
+Create a folder: cars. Inside it: mercedes, bmw, scratch and upload images
+<img src="readme-pics/s3-bucket.png"/>
+7. Depending on the number of images you can install AWS CLI and use s3 sync command.
+<img src="readme-pics/cli.png"/>
+Example: ```aws s3 sync . s3://mybucket```
+
+## Rekognition Training
+<img src="readme-pics/rekognition-steps.png"/>
+With Amazon Rekognition Custom Labels, you can identify the objects and scenes in images that are specific to your business needs. For example, you can find your logo in social media posts, identify your products on store shelves, classify machine parts in an assembly line, distinguish healthy and infected plants, or detect animated characters in videos.
+
+No machine learning expertise is required to build your custom model. Rekognition Custom Labels includes AutoML capabilities that take care of the machine learning for you. Once the training images are provided, Rekognition Custom Labels can automatically load and inspect the data, select the right machine learning algorithms, train a model, and provide model performance metrics.
+
+Rekognition Custom Labels builds off of Rekognition’s existing capabilities, which are already trained on tens of millions of images across many categories. Instead of thousands of images, you simply need to upload a small set of training images (typically a few hundred images or less) that are specific to your use case into our easy-to-use console. If your images are already labeled, Rekognition can begin training in just a few clicks. If not, you can label them directly within Rekognition’s labeling interface, or use Amazon SageMaker Ground Truth to label them for you. Once Rekognition begins training from your image set, it can produce a custom image analysis model for you in just a few hours. Behind the scenes, Rekognition Custom Labels automatically loads and inspects the training data, selects the right machine learning algorithms, trains a model, and provides model performance metrics. You can then use your custom model via the Rekognition Custom Labels API and integrate it into your applications.
+
+In this example, we will train to analyze car makers and damages.
+
+### Create a project (console)
+1.	Sign in to the AWS Management Console and open the Amazon Rekognition console at https://console.aws.amazon.com/rekognition/
+2.	In the left pane, choose Use Custom Labels. The Amazon Rekognition Custom Labels landing page is shown.
+3.	The Amazon Rekognition Custom Labels landing page, choose Get started. In the left pane, Choose Projects. 
+4.	Choose a Region close to you to minimize latency and costs and address regulatory requirements.
+5.	Choose Create Project.
+6.	In Project name, enter a name for your project. For example “mendixcars”
+7.	Choose Create project to create your project.
+
+### Create Dataset
+
+1.	Choose Create dataset. The Create dataset page is shown.
+2.	In Starting configuration, choose either Start with a single dataset 
+<img src="readme-pics/rekognition-dataset.png">
+
+3.	Choose Import images from Amazon S3 bucket.
+4.	In S3 URI, enter the Amazon S3 bucket location and folder path. Select a parent “cars” folder that contains folders: bmw, mercedes, scratch and click Copy S3 URI.
+<img src="readme-pics/rekognition-objects.png">
+
+5.	Choose Automatically attach labels to images based on the folder.
+6.	Choose Create Datasets. The datasets page for your project opens.
+<img src="readme-pics/rekognition-explore.png">
+
+7.	Scroll down and copy the policy provided.  In a new tab, open the S3 console and select your bucket with images. 
+<img src="readme-pics/rekognition-policy.png">
+
+8.	On “Permissions” tab scroll down to “Bucket policy” and click edit and paste the policy. Click Save changes to save policy update.
+<img src="readme-pics/rekognition-permissions.png">
+<img src="readme-pics/rekognition-permissions2.png">
+
+9.	Go back to Rekognition configuration, click “Create Dataset” in Rekognition console. Depending on the number of images, it might take a few minutes to create a dataset.
+
+### Label Images
+1.	Choose Start labeling to enter labeling mode. Select a first label. 
+Note: Do car models first (bmw, mercedes) and then do defects (scratches).
+2.	In the image gallery, select one or more images that you want to add labels to. You can only select images on a single page at a time. To select a contiguous range of images on a page:
+3.	Select the first image in the range.
+4.	Press and hold the shift key.
+5.	Select the last image range. The images between the first and second image are also selected.
+6.	Release the shift key.
+7.	Choose Assign Labels.
+<img src="readme-pics/rekognition-labelling.png">
+
+8. Click Draw bounding boxes and mark scratches as well as cars on the images
+<img src="readme-pics/rekognition-labelling2.png">
+
+9.	Repeat labeling until every image is annotated with the required labels. 
+10.	Choose Save changes to save your changes.
+11.	Choose Exit to exit labeling mode.
+
+### Train Model
+1.  On the Project page, choose Train model.
+<img src="readme-pics/rekognition-train-model.png">
+
+2.  Keep default settings and click Train model. Depending on a number of images it will take from 30 minutes to 24 hours. 
+Note: 200 images took about 40 minutes.
+<img src="readme-pics/rekognition-train-confirmation.png">
+
+<img src="readme-pics/rekognition-train-process.png">
+
+### Evaluate
+1.	In the Models section of the project page, you can check the current status in the Model Status column, where the training's in progress.
+
+<img src="readme-pics/rekognition-evaluate.png">
+
+After your model is trained, Amazon Rekognition Custom Labels provides the following metrics as a summary of the training results and as metrics for each label: Precision, Recall, F1.
+
+2.  If you are interested in how your model performed on test images Choose View test results to see the results for individual test images. For more information, see [Metrics for evaluating your model](https://docs.aws.amazon.com/rekognition/latest/customlabels-dg/im-metrics-use.html).
+
+<img src="readme-pics/rekognition-evaluate-2.png">
+
+<img src="readme-pics/rekognition-evaluate-3.png">
+
+### Use Model
+1.	In the Start or stop model section select the number of inference units that you want to use. For more information, see [Running a trained Amazon Rekognition Custom Labels model](https://docs.aws.amazon.com/rekognition/latest/customlabels-dg/running-model.html).
+2.	Choose Start. In the Start model dialog box, choose Start.
+3.	In the Model section, check the status of the model. When the model status is RUNNING, you can use the model to analyze images. 
+<img src="readme-pics/rekognition-use-model.png">
+
+6.3 You can test your model using AWS CLI command.
+
+```aws rekognition detect-custom-labels --project-version-arn "your model arn" --image "S3Object={Bucket=mendixcars, Name=car2.jpg}" --region us-west-2```
+
+Replace the information in yellow with details of your model and a bucket containing new images for analysis.
