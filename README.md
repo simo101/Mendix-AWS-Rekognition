@@ -40,7 +40,7 @@ Choose a Region close to you to minimize latency and costs and address regulator
 Create a folder: cars. Inside it: mercedes, bmw, scratch and upload images
 <img src="readme-pics/s3-bucket.png"/>
 7. Depending on the number of images you can install AWS CLI and use s3 sync command.
-<img src="readme-pics/cli.png"/>
+<img src="readme-pics/console.png"/>
 Example: ```aws s3 sync . s3://mybucket```
 
 ## Rekognition Training
