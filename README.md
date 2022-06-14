@@ -3,32 +3,132 @@ Welcome to the Mendix AWS Rekognition template. This template has been designed 
 
 <b>This template already assumes that you have some knowledge of AWS and an AWS Account.</b>
 
+- [Setup](#setup)
+- [The Mendix Build](#the-mendix-build)
+    - [Building the domain model](#building-the-domain-model)
+    - [Building the User interface](#building-the-user-interface)
+    - [Building the logic](#building-the-logic)
+- [The AWS Build](#aws-build)
+    - [AWS S3 Dataset](#aws-s3-dataset)
+    - [Rekognition Training](#rekognition-training)
+
+
 ## Setup
-In order to connect to AWS Rekognition it's important that you setup a number of constants. These constants are environment variables needed to make sure that the app can connect to the right AWS service using your AWS credentials.
+In order to connect to AWS Rekognition it's important that you set up a number of constants. These constants are environment variables needed to make sure that the app can connect to the right AWS service using your AWS credentials.
 
 ### Setting your AWS Access and Secret Keys
-In order to authenticate with AWS services it's important that requests are signed using an AWS access and secret key. In Mendix this is done using the Sig4 process. Inside this application we have already included a module to help with this process.
-1. Create a access and secret key pair on AWS with access to Rekognition service
+In order to authenticate with AWS services, it's important that requests are signed using an AWS access and secret key. In Mendix this is done using the Sig4 process. Inside this application, we have already included a module to help with this process.
+1. Create access and secret key pair on AWS with access to Rekognition service
 2. Copy each of the keys
 3. With the application open inside Studio Pro expand the Marketplace modules folder item in the app explorer.
 4. Then expand the AWS_Sig4 module.
-5. Finally double click on the Access Key ID and Secret Key then paste the values into each.
-<img src="readme-pics/app-explorer.jpg"/>
+5. Finally, double click on the Access Key ID and Secret Key then paste the values into each.
+<img src="readme-img/app-explorer.jpg"/>
 
 ### Setting up the Rekognition constants
-The Rekognition module has two constants that need to be set to ensure that the APIs can communicate with the pre-built rekognition model. These are:
-1. AWS_HostPattern - This should be the url of the endpoint that the api is calling, this will be different depending on the AWS region used for rekognition. The endpoint URLs can be found here: https://docs.aws.amazon.com/general/latest/gr/rekognition.html
-2. AWS_Region - This should be set to the region of where the rekognition AI model is deployed. The regions can be found here: https://docs.aws.amazon.com/general/latest/gr/rekognition.html
+The Rekognition module has two constants that need to be set to ensure that the APIs can communicate with the pre-built Rekognition model. These are:
+1. AWS_HostPattern - This should be the URL of the endpoint that the API is calling, this will be different depending on the AWS region used for Rekognition. The endpoint URLs can be found here: https://docs.aws.amazon.com/general/latest/gr/rekognition.html
+2. AWS_Region - This should be set to the region where the Rekognition AI model is deployed. The regions can be found here: https://docs.aws.amazon.com/general/latest/gr/rekognition.html
 
 These constants can be found inside the AWS_Rekognition module in the marketplace folder. Then open up the constants folder:
 
-<img src="readme-pics/app-explorer-rekognition.jpg"/>
+<img src="readme-img/app-explorer-rekognition.jpg"/>
 
-Once you have these constants setup your ready to begin your build.
+Once you have these constants set up you're ready to begin your build.
 
-## The Build
+## The Mendix Build
 
-## AWS S3 Dataset
+### Building the domain model
+The first step with many Mendix projects is to start with building the data structure. Data is modeled in Mendix using domain models. Each Module in Mendix contains a domain model where you can model the entities, associations and attributes. Follow the below steps to build out the right structure. These instructions assume that you have already pre-installed Mendix Studio Pro 9.12.2+.
+
+1. Using the App Explorer on the left-hand side open up the module "MxRekognitionDemo_Start".
+2. Double click on the "Domain model" 
+3. Drag an entity from the Toolbox onto the Canvas. The toolbox can be often found on the right-hand side.
+4. Double click on the Entity to open the dialog box.
+5. Change the name to Picture.
+6. Click the "Select" button next to "Generalization".
+7. In the Search field type "Image".
+8. Double click on the Image entity.
+9. Click the "Ok" button to close the dialog.
+10. Drag another entity onto the workbench.
+11. Double click on this entity and rename it to Label.
+12. Under the "Attributes" tab click the "New" button.
+13. Name your first attribute "Name".
+14. Click "Ok" to close the dialog.
+15. Add another Attribute and call this one "Confidence".
+16. Under the Data Type Dropdown select "Decimal".
+17. Click "Ok" and then "Ok" to close both dialogs.
+18. Associate the two entities by dragging the arrow from Label to Picture. This will create a relationship between these two entities.
+
+### Building the User Interface
+1. Open up the folder "Pages" inside the "MxRekognitionDemo_Start" module.
+2. Double click on "Home_Start" to open up.
+3. From the right-hand side open up the "Toolbox" and then "Building Blocks".
+4. Drag the Block labeled "Label Block" to the bottom empty space.
+5. Drag the other building block "Picture Block" to the space above.
+6. Next, we need to connect these up to our Picture object. Click on the widgets tab on the right-hand side.
+7. Drag on a "Data view" widget onto the page at the top.
+8. Double click on the widget to open up the properties dialog.
+9. Under "Data source" select "Nanoflow"
+10. Click the "Select" button.
+11. Click the "New" button at the bottom of the popup.
+12. Give the Nanoflow a name like "DSO_NewPicture".
+13. Click the "Show" button to open up the nanoflow and close the dialog.
+14. Using the Toolbox drag on a "Create Object" action.
+15. Double click on the action and set the entity type to our new "Picture" entity.
+16. Double click on the "Endpoint" represented by a red dot. 
+17. Configure it to return an "Object" and set the value to the newly created Object.
+18. Open up the "Home_Start" page again.
+19. Drag the "Layout" into the Dataview.
+20. Double click on the Picture control and connect it to the "Picture" entity.
+21. Double click on the "List view" and connect it to the associated entity "Label"
+22. Configure the left parameter in the ListView by double-clicking on the text item, then use then connect Parameter {1} up to "Name".
+23. Configure the right parameter in the ListView by double-clicking on the text item, then use then connect Parameter {1} up to "Confidence".
+
+
+### Building the logic
+Logic in Mendix is defined using Microflows for server-side logic and Nanoflows for client-side. Both of these concepts use the same modeling paradigm. Allowing you to define logic using actions, decisions and loops.
+
+To perform the logic needed we'll create a Nanoflow which will open up the camera, save the picture, process it by Rekognition, and save the results. Here are the steps:
+
+1. Right-click on the "Take a picture" button and click "Edit on click action".
+2. Select from the dropdown "Call a Nanoflow".
+3. Click the "New" button.
+4. Enter the name "ACT_TakePicture" and click "OK".
+5. Open up the newly built Nanoflow.
+6. Drag and Drop from the Toolbox a "Take Picture" action.
+7. Configure the parameters as follows:
+    - Picture = NewPicture
+    - Show Confirmation Screen = false
+    - Picture Quality = low
+    - Maximum width = empty
+    - Maximum height = empty
+8. From the Toolbox drag the detect custom labels action and configure as follows:
+    - ProjectARN = Your Rekognition ARN
+    - Image = NewPicture
+    - MaxResults = 10
+    - MinConfidence = 0
+    - AWS_Region = your region
+9. Add a Loop activity to the microflow and connect it to the CustomLabel List
+10. Inside the loop drag a retrieve action to retrieve the BoundingBox.
+11. Connect up the retrieve action by double-clicking on the action, selecting "By association", clicking "Select", and selecting the Bounding Box association.
+12. Drag on a "Create" action into the loop and draw a line from the bounding box to the "Create" action.
+13. Configure the activity by selecting the Entity "Label".
+14. Set 3 Members to the following:
+    - Label_Picture = $NewPicture
+    - Confidence = $IteratorCustomLabel/Confidence
+    - Name = $IteratorCustomLabel/Name
+
+15. Finally add a bounding box activity and configure as follows:
+    - Class name = 'img-container'
+    - Bounding box = $BoundingBox
+    - Custom label = $IteratorCustomLabel
+    - High Confidence Threshold = 80
+    - Medium Confidence Threshold = 50
+
+
+## AWS Build
+### AWS S3 Dataset
 1.	Sign in to the AWS Management Console and open the Amazon S3 console at https://console.aws.amazon.com/s3/.
 2.	Choose Create bucket.
 The Create bucket wizard opens.
@@ -38,15 +138,15 @@ Choose a Region close to you to minimize latency and costs and address regulator
 5.	Leave other settings as default, scroll down and click Create bucket button.
 6.	Select a new bucket and create folders in the bucket by clicking Create folder button.
 Create a folder: cars. Inside it: mercedes, bmw, scratch and upload images
-<img src="readme-pics/s3-bucket.png"/>
-7. Depending on the number of images you can install AWS CLI and use s3 sync command.
-<img src="readme-pics/console.png"/>
+<img src="readme-img/s3-bucket.png"/>
+7. Depending on the number of images you can install AWS CLI and use S3 sync command.
+<img src="readme-img/console.png"/>
 Example: 
 
 ```aws s3 sync . s3://mybucket```
 
-## Rekognition Training
-<img src="readme-pics/rekognition-steps.png"/>
+### Rekognition Training
+<img src="readme-img/rekognition-steps.png"/>
 With Amazon Rekognition Custom Labels, you can identify the objects and scenes in images that are specific to your business needs. For example, you can find your logo in social media posts, identify your products on store shelves, classify machine parts in an assembly line, distinguish healthy and infected plants, or detect animated characters in videos.
 
 No machine learning expertise is required to build your custom model. Rekognition Custom Labels includes AutoML capabilities that take care of the machine learning for you. Once the training images are provided, Rekognition Custom Labels can automatically load and inspect the data, select the right machine learning algorithms, train a model, and provide model performance metrics.
@@ -55,39 +155,39 @@ Rekognition Custom Labels builds off of Rekognition’s existing capabilities, w
 
 In this example, we will train to analyze car makers and damages.
 
-### Create a project (console)
+#### Create a project (console)
 1.	Sign in to the AWS Management Console and open the Amazon Rekognition console at https://console.aws.amazon.com/rekognition/
 2.	In the left pane, choose Use Custom Labels. The Amazon Rekognition Custom Labels landing page is shown.
-3.	The Amazon Rekognition Custom Labels landing page, choose Get started. In the left pane, Choose Projects. 
+3.	The Amazon Rekognition Custom Labels landing page, choose to Get started. In the left pane, Choose Projects. 
 4.	Choose a Region close to you to minimize latency and costs and address regulatory requirements.
 5.	Choose Create Project.
 6.	In Project name, enter a name for your project. For example “mendixcars”
 7.	Choose Create project to create your project.
 
-### Create Dataset
+#### Create Dataset
 
 1.	Choose Create dataset. The Create dataset page is shown.
 2.	In Starting configuration, choose either Start with a single dataset 
-<img src="readme-pics/rekognition-dataset.png">
+<img src="readme-img/rekognition-dataset.png">
 
 3.	Choose Import images from Amazon S3 bucket.
 4.	In S3 URI, enter the Amazon S3 bucket location and folder path. Select a parent “cars” folder that contains folders: bmw, mercedes, scratch and click Copy S3 URI.
-<img src="readme-pics/rekognition-objects.png">
+<img src="readme-img/rekognition-objects.png">
 
 5.	Choose Automatically attach labels to images based on the folder.
 6.	Choose Create Datasets. The datasets page for your project opens.
-<img src="readme-pics/rekognition-explore.png">
+<img src="readme-img/rekognition-explore.png">
 
 7.	Scroll down and copy the policy provided.  In a new tab, open the S3 console and select your bucket with images. 
-<img src="readme-pics/rekognition-policy.png">
+<img src="readme-img/rekognition-policy.png">
 
 8.	On “Permissions” tab scroll down to “Bucket policy” and click edit and paste the policy. Click Save changes to save policy update.
-<img src="readme-pics/rekognition-permissions.png">
-<img src="readme-pics/rekognition-permissions2.png">
+<img src="readme-img/rekognition-permissions.png">
+<img src="readme-img/rekognition-permissions2.png">
 
 9.	Go back to Rekognition configuration, click “Create Dataset” in Rekognition console. Depending on the number of images, it might take a few minutes to create a dataset.
 
-### Label Images
+#### Label Images
 1.	Choose Start labeling to enter labeling mode. Select a first label. 
 Note: Do car models first (bmw, mercedes) and then do defects (scratches).
 2.	In the image gallery, select one or more images that you want to add labels to. You can only select images on a single page at a time. To select a contiguous range of images on a page:
@@ -96,43 +196,43 @@ Note: Do car models first (bmw, mercedes) and then do defects (scratches).
 5.	Select the last image range. The images between the first and second image are also selected.
 6.	Release the shift key.
 7.	Choose Assign Labels.
-<img src="readme-pics/rekognition-labelling.png">
+<img src="readme-img/rekognition-labelling.png">
 
 8. Click Draw bounding boxes and mark scratches as well as cars on the images
-<img src="readme-pics/rekognition-labelling2.png">
+<img src="readme-img/rekognition-labelling2.png">
 
 9.	Repeat labeling until every image is annotated with the required labels. 
 10.	Choose Save changes to save your changes.
 11.	Choose Exit to exit labeling mode.
 
-### Train Model
+#### Train Model
 1.  On the Project page, choose Train model.
-<img src="readme-pics/rekognition-train-model.png">
+<img src="readme-img/rekognition-train-model.png">
 
 2.  Keep default settings and click Train model. Depending on a number of images it will take from 30 minutes to 24 hours. 
 Note: 200 images took about 40 minutes.
-<img src="readme-pics/rekognition-train-confirmation.png">
+<img src="readme-img/rekognition-train-confirmation.png">
 
-<img src="readme-pics/rekognition-train-process.png">
+<img src="readme-img/rekognition-train-process.png">
 
-### Evaluate
+#### Evaluate
 1.	In the Models section of the project page, you can check the current status in the Model Status column, where the training's in progress.
 
-<img src="readme-pics/rekognition-evaluate.png">
+<img src="readme-img/rekognition-evaluate.png">
 
 After your model is trained, Amazon Rekognition Custom Labels provides the following metrics as a summary of the training results and as metrics for each label: Precision, Recall, F1.
 
 2.  If you are interested in how your model performed on test images Choose View test results to see the results for individual test images. For more information, see [Metrics for evaluating your model](https://docs.aws.amazon.com/rekognition/latest/customlabels-dg/im-metrics-use.html).
 
-<img src="readme-pics/rekognition-evaluate-2.png">
+<img src="readme-img/rekognition-evaluate-2.png">
 
-<img src="readme-pics/rekognition-evaluate-3.png">
+<img src="readme-img/rekognition-evaluate-3.png">
 
-### Use Model
+#### Use Model
 1.	In the Start or stop model section select the number of inference units that you want to use. For more information, see [Running a trained Amazon Rekognition Custom Labels model](https://docs.aws.amazon.com/rekognition/latest/customlabels-dg/running-model.html).
 2.	Choose Start. In the Start model dialog box, choose Start.
 3.	In the Model section, check the status of the model. When the model status is RUNNING, you can use the model to analyze images. 
-<img src="readme-pics/rekognition-use-model.png">
+<img src="readme-img/rekognition-use-model.png">
 
 6.3 You can test your model using AWS CLI command.
 
