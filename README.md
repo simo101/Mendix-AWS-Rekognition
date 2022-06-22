@@ -1,7 +1,7 @@
 # Mendix AWS Rekoginition Template
 Welcome to the Mendix AWS Rekognition template. This template has been designed to help you get started with using Mendix and AWS Rekognition. It contains all the required modules to make it easy for you to build an app connected to AWS Rekognition. Once built the app will allow you to take a photo on your mobile phone or laptop, upload it to AWS Rekognition, and view the results of the Rekognition analysis. The template contains a start and complete module so that you can either decide to use the final solution or build your way up to the solution.
 
-<b>This template already assumes that you have some knowledge of AWS and an AWS Account.</b>
+<b>This template already assumes that you have some knowledge of AWS, an AWS and Mendix account</b>
 
 - [Setup](#setup)
 - [The Mendix Build](#the-mendix-build)
