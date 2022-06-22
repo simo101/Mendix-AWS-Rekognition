@@ -44,47 +44,67 @@ The first step with many Mendix projects is to start with building the data stru
 1. Using the App Explorer on the left-hand side open up the module "MxRekognitionDemo_Start".
 2. Double click on the "Domain model" 
 3. Drag an entity from the Toolbox onto the Canvas. The toolbox can be often found on the right-hand side.
+<img src="readme-img/mx-build-entity.jpg"/>
 4. Double click on the Entity to open the dialog box.
 5. Change the name to Picture.
+<img src="readme-img/mx-build-picture-entity.jpg"/>
 6. Click the "Select" button next to "Generalization".
 7. In the Search field type "Image".
+<img src="readme-img/mx-build-generalization.jpg"/>
 8. Double click on the Image entity.
 9. Click the "Ok" button to close the dialog.
 10. Drag another entity onto the workbench.
+<img src="readme-img/mx-build-label-entity.jpg"/>
 11. Double click on this entity and rename it to Label.
+
 12. Under the "Attributes" tab click the "New" button.
 13. Name your first attribute "Name".
 14. Click "Ok" to close the dialog.
 15. Add another Attribute and call this one "Confidence".
 16. Under the Data Type Dropdown select "Decimal".
+<img src="readme-img/mx-build-label-properties.jpg"/>
 17. Click "Ok" and then "Ok" to close both dialogs.
 18. Associate the two entities by dragging the arrow from Label to Picture. This will create a relationship between these two entities.
+<img src="readme-img/mx-build-label-associate.jpg"/>
 
 ### Building the User Interface
 1. Open up the folder "Pages" inside the "MxRekognitionDemo_Start" module.
 2. Double click on "Home_Start" to open up.
 3. From the right-hand side open up the "Toolbox" and then "Building Blocks".
+<img src="readme-img/mx-build-page-build.jpg"/>
 4. Drag the Block labeled "Label Block" to the bottom empty space.
 5. Drag the other building block "Picture Block" to the space above.
+<img src="readme-img/mx-build-page-build-blocks.jpg"/>
 6. Next, we need to connect these up to our Picture object. Click on the widgets tab on the right-hand side.
 7. Drag on a "Data view" widget onto the page at the top.
+<img src="readme-img/mx-build-page-dataview.jpg"/>
 8. Double click on the widget to open up the properties dialog.
 9. Under "Data source" select "Nanoflow"
 10. Click the "Select" button.
+<img src="readme-img/mx-build-page-datasource.jpg"/>
 11. Click the "New" button at the bottom of the popup.
 12. Give the Nanoflow a name like "DSO_NewPicture".
+<img src="readme-img/mx-build-page-get-picture.jpg"/>
 13. Click the "Show" button to open up the nanoflow and close the dialog.
+<img src="readme-img/mx-build-page-nanoflow.jpg"/>
 14. Using the Toolbox drag on a "Create Object" action.
+<img src="readme-img/mx-build-page-create-action.jpg"/>
 15. Double click on the action and set the entity type to our new "Picture" entity.
+<img src="readme-img/mx-build-page-select-entity.jpg"/>
 16. Double click on the "Endpoint" represented by a red dot. 
-17. Configure it to return an "Object" and set the value to the newly created Object.
-18. Open up the "Home_Start" page again.
-19. Drag the "Layout" into the Dataview.
-20. Double click on the Picture control and connect it to the "Picture" entity.
-21. Double click on the "List view" and connect it to the associated entity "Label"
-22. Configure the left parameter in the ListView by double-clicking on the text item, then use then connect Parameter {1} up to "Name".
-23. Configure the right parameter in the ListView by double-clicking on the text item, then use then connect Parameter {1} up to "Confidence".
-
+17. Configure it to return an "Object" 
+<img src="readme-img/mx-build-page-nanoflow-return.jpg"/>
+18. Set the value to the newly created Object.
+<img src="readme-img/mx-build-page-nanoflow-set-return.jpg"/>
+19. Open up the "Home_Start" page again.
+20. Drag the "Layout" into the Dataview.
+21. Double click on the Picture control and connect it to the "Picture" entity.
+22. Double click on the "List view" and connect it to the associated entity "Label"
+<img src="readme-img/mx-build-page-listview-association.jpg"/>
+23. Configure the left parameter in the ListView by double-clicking on the text item, then use then connect Parameter {1} up to "Name".
+<img src="readme-img/mx-build-page-setting-labels.jpg"/>
+24. Configure the right parameter in the ListView by double-clicking on the text item, then use then connect Parameter {1} up to "Confidence".
+<img src="readme-img/mx-build-page-setting-labels-confidence.jpg"/>
 
 ### Building the logic
 Logic in Mendix is defined using Microflows for server-side logic and Nanoflows for client-side. Both of these concepts use the same modeling paradigm. Allowing you to define logic using actions, decisions and loops.
@@ -95,37 +115,50 @@ To perform the logic needed we'll create a Nanoflow which will open up the camer
 2. Select from the dropdown "Call a Nanoflow".
 3. Click the "New" button.
 4. Enter the name "ACT_TakePicture" and click "OK".
+<img src="readme-img/mx-build-page-edit-action.jpg"/>
 5. Open up the newly built Nanoflow.
 6. Drag and Drop from the Toolbox a "Take Picture" action.
+<img src="readme-img/mx-build-logic-take-picture.jpg"/>
 7. Configure the parameters as follows:
     - Picture = NewPicture
     - Show Confirmation Screen = false
     - Picture Quality = low
     - Maximum width = empty
     - Maximum height = empty
+<img src="readme-img/mx-build-logic-take-picture-options.jpg"/>
 8. From the Toolbox drag the detect custom labels action and configure as follows:
     - ProjectARN = Your Rekognition ARN
     - Image = NewPicture
     - MaxResults = 10
     - MinConfidence = 0
     - AWS_Region = your region
+<img src="readme-img/mx-build-logic-rekognition.jpg"/>
+
 9. Add a Loop activity to the microflow and connect it to the CustomLabel List
+<img src="readme-img/mx-build-logic-loop.jpg"/>
+
 10. Inside the loop drag a retrieve action to retrieve the BoundingBox.
 11. Connect up the retrieve action by double-clicking on the action, selecting "By association", clicking "Select", and selecting the Bounding Box association.
+<img src="readme-img/mx-build-logic-retrieve-action.jpg"/>
 12. Drag on a "Create" action into the loop and draw a line from the bounding box to the "Create" action.
+<img src="readme-img/mx-build-logic-create-action.jpg"/>
 13. Configure the activity by selecting the Entity "Label".
 14. Set 3 Members to the following:
     - Label_Picture = $NewPicture
     - Confidence = $IteratorCustomLabel/Confidence
     - Name = $IteratorCustomLabel/Name
-
+<img src="readme-img/mx-build-logic-create-configure.jpg"/>
 15. Finally add a bounding box activity and configure as follows:
     - Class name = 'img-container'
     - Bounding box = $BoundingBox
     - Custom label = $IteratorCustomLabel
     - High Confidence Threshold = 80
     - Medium Confidence Threshold = 50
+<img src="readme-img/mx-build-logic-bounding-box.jpg"/>
 
+16. We're now complete so we need to run the project locally. Click the Green play Icon on the top right.
+<img src="readme-img/mx-build-run-app.jpg"/>
+17. Open up your app locally on your laptop by going to http://localhost:8080. If you wish to try it on your phone you'll need to create a secure tunnel using something like [ngrok](https://ngrok.com/) to ensure that the camera on your phone can be accessed. Mobile browsers only allow you to access the camera over a secure connection using https. 
 
 ## AWS Build
 ### AWS S3 Dataset
