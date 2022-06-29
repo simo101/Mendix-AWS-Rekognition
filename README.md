@@ -225,6 +225,8 @@ To perform the logic needed we'll create a Nanoflow which will open up the camer
 
 ## AWS Build
 ### AWS S3 Dataset
+The image dataset used in the webinar is available here: [cars.zip](/rekognition-dataset/cars.zip)
+
 1.	Sign in to the AWS Management Console and open the Amazon S3 console at https://console.aws.amazon.com/s3/.
 2.	Choose Create bucket.
 The Create bucket wizard opens.
@@ -244,6 +246,8 @@ Create a folder: cars. Inside it: mercedes, bmw, scratch and upload images
 Example: 
 
 ```aws s3 sync . s3://mybucket```
+
+You can find the image dataset that we used for the webinar inside this repo here: [cars.zip](/rekognition-dataset/cars.zip)
 
 ### Rekognition Training
 <img src="readme-img/rekognition-steps.png"/>
