@@ -26,7 +26,14 @@ Gain free hands on experience with AWS here: [Sign Up](https://aws.amazon.com/fr
 ## Setup
 In order to connect to AWS Rekognition it's important that you set up a number of constants. These constants are environment variables needed to make sure that the app can connect to the right AWS service using your AWS credentials.
 
-### Setting your AWS Access and Secret Keys
+### Creating your AWS Keys
+To generate an AWS Access and Secret Key follow the steps below: 
+1. [Create an AWS Account](https://docs.aws.amazon.com/rekognition/latest/customlabels-dg/su-account.html)
+2. [Create an IAM Admin](https://docs.aws.amazon.com/rekognition/latest/customlabels-dg/su-account-user.html)
+3. [Create Access Keys](https://docs.aws.amazon.com/rekognition/latest/customlabels-dg/su-awscli-sdk.html)
+
+
+### Setting your AWS Access and Secret Keys in Mendix
 In order to authenticate with AWS services, it's important that requests are signed using an AWS access and secret key. In Mendix this is done using the Sig4 process. Inside this application, we have already included a module to help with this process.
 1. Create access and secret key pair on AWS with access to Rekognition service
 2. Copy each of the keys
