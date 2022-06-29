@@ -38,7 +38,11 @@ In order to authenticate with AWS services, it's important that requests are sig
 
 ### Setting up the Rekognition constants
 The Rekognition module has two constants that need to be set to ensure that the APIs can communicate with the pre-built Rekognition model. These are:
-1. AWS_HostPattern - This should be the URL of the endpoint that the API is calling, this will be different depending on the AWS region used for Rekognition. The endpoint URLs can be found here: https://docs.aws.amazon.com/general/latest/gr/rekognition.html
+1. AWS_HostPattern - This should be the URL of the endpoint that the API is calling, this will be different depending on the AWS region used for Rekognition. The endpoint URLs can be found here: https://docs.aws.amazon.com/general/latest/gr/rekognition.html. 
+
+The URL of the rekognition endpoint is usually in this format: 
+```https://rekognition.{aws-region}.amazonaws.com```. But this will be slightly different if you're running from US Gov Or FIPS Cloud.
+
 2. AWS_Region - This should be set to the region where the Rekognition AI model is deployed. The regions can be found here: https://docs.aws.amazon.com/general/latest/gr/rekognition.html
 
 These constants can be found inside the AWS_Rekognition module in the marketplace folder. Then open up the constants folder:
@@ -106,13 +110,13 @@ The first step with many Mendix projects is to start with building the data stru
 <img src="readme-img/mx-build-page-dataview.jpg"/>
 
 8. Double click on the widget to open up the properties dialog.
-9. Under "Data source" select "Nanoflow"
+9. Under "Data source" select "Nanoflow". You can find more information on Nanoflows here: [Nanoflows](https://docs.mendix.com/refguide/nanoflows/)
 10. Click the "Select" button.
 
 <img src="readme-img/mx-build-page-datasource.jpg"/>
 
 11. Click the "New" button at the bottom of the popup.
-12. Give the Nanoflow a name like "DSO_NewPicture".
+12. Give the Nanoflow a name like "DSO_NewPicture". You can find more information on naming conventions here: [Best practices](https://docs.mendix.com/howto/general/dev-best-practices/#341-entity-event-microflows)
 
 <img src="readme-img/mx-build-page-get-picture.jpg"/>
 
@@ -138,7 +142,10 @@ The first step with many Mendix projects is to start with building the data stru
 <img src="readme-img/mx-build-page-nanoflow-set-return.jpg"/>
 
 19. Open up the "Home_Start" page again.
-20. Drag the "Layout" into the Dataview.
+20. Drag the entiere existing layout into the Dataview.
+
+<img src="readme-img/mx-build-layout-drag.gif"/>
+
 21. Double click on the Picture control and connect it to the "Picture" entity.
 22. Double click on the "List view" and connect it to the associated entity "Label"
 
