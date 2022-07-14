@@ -1,35 +1,45 @@
-.region-topbar {
-    background-color: #595F61;
-    height: 55px;
-    padding-top: 10px;
+.aws-layout{
+        .region-topbar {
+        background-color: #595F61;
+        height: auto;
+        padding: 10px 0px;
 
-    .name-column {
-        padding-left: 0px;
+        .mx-navbar ul.nav > li.mx-navbar-item > a:hover, .mx-navbar ul.nav > li.mx-navbar-item > a:focus, .mx-navbar ul.nav > li.mx-navbar-item > a.active{
+            background-color: darken(#595F61,10%);
+        }
 
+        .name-column {
+            padding-left: 0px;
+        }
         .app-name {
             font-size: 20px;
             margin-bottom: 0px;
         }
-    }
 
-    .sign-out-column {
-        padding-right: 20px !important;
 
-        .sing-out {
-            font-size: 16px;
-            font-weight: 700;
-            color: #fff;
-            text-decoration: underline; 
+        .sign-out-column {
+            padding-right: 20px !important;
 
-            &:hover {
-                color: $brand-success;
+            .sing-out {
+                font-size: 16px;
+                font-weight: 700;
+                color: #fff;
+                text-decoration: underline; 
+
+                &:hover {
+                    color: $brand-success;
+                }
+
+
             }
-
-
+        }
+        .mx-navbar{
+            background-color: #595F61;
+            padding-bottom: 10px;
         }
     }
-}
 
-.mobile-header{
-    background-color: #595F61;
+    .mobile-header{
+        background-color: #595F61;
+    }
 }

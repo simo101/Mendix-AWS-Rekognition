@@ -308,5 +308,17 @@ html body.profile-phone{
         }
     }
 
+
    
+}
+.modal-dialog {
+    .modal-content {
+        > .mx-dataview-content{
+            padding: 15px 20px;
+        }
+
+    }
+    .mx-dataview-controls{
+        padding: 15px 20px;
+    }
 }

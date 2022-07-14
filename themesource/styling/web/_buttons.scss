@@ -6,10 +6,13 @@
     border-color: $brand-primary;
     background-color: $brand-primary;
 
+    
     &:hover {
-        background-color: $brand-success;
-        border-color: $brand-success;
+        color: #fff;
+        background-color: $brand-primary;
+        border-color: $brand-primary;;
     }
+
 }
 
 .btn-default {
@@ -20,13 +23,22 @@
     background-color: $brand-default;
     font-weight: 500;
 
-
+    
     &:hover {
+        color: #fff;
         background-color: $brand-primary;
-        color: $brand-default;
-        border-color: #ABA5C9;
+        border-color: $brand-primary;;
     }
+
 }
+
+.btn-danger {
+    border-radius: 50px;
+    font-size: 16px;
+    font-weight: 700;
+
+}
+
 
 .btn-success {
     color: $font-color-default;
@@ -37,11 +49,6 @@
     background-color: $brand-success;
 
 
-    &:hover {
-        color: #fff;
-        background-color: $brand-primary;
-        border-color: $brand-primary;;
-    }
 }
 
 .btn-photo-edit{
