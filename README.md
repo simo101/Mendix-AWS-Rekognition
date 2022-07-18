@@ -27,7 +27,7 @@ Gain free hands on experience with AWS here: [Sign Up](https://aws.amazon.com/fr
 ## AWS Build
 
 ### AWS S3 Dataset
-The image dataset used in the webinar is available here: [cars.zip](/rekognition-dataset/cars.zip)
+The image dataset used in the webinar is available here: [cars.zip](/rekognition-dataset/)
 
 1.	Sign in to the AWS Management Console and open the Amazon S3 console at https://console.aws.amazon.com/s3/.
 2.	Choose Create bucket.
