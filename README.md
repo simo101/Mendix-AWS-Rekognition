@@ -49,7 +49,7 @@ Example:
 
 ```aws s3 sync . s3://mybucket```
 
-You can find the image dataset that we used for the webinar inside this repo here: [cars.zip](/rekognition-dataset/cars.zip)
+You can find the image dataset that we used for the webinar inside this repo here: [Cars Folder](/rekognition-dataset)
 
 ### Rekognition Training
 <img src="readme-img/rekognition-steps.png"/>
